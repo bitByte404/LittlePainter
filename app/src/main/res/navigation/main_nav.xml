@@ -9,55 +9,20 @@
         android:id="@+id/welcomeFragment"
         android:name="com.wuliner.littlepainter.WelcomeFragment"
         android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" >
-        <action
-            android:id="@+id/action_welcomeFragment_to_guideFragment"
-            app:destination="@id/guideFragment" />
-        <action
-            android:id="@+id/action_welcomeFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        tools:layout="@layout/fragment_welcome" />
     <fragment
         android:id="@+id/guideFragment"
         android:name="com.wuliner.littlepainter.GuideFragment"
         android:label="fragment_guide"
-        tools:layout="@layout/fragment_guide" >
-        <action
-            android:id="@+id/action_guideFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_guide" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.wuliner.littlepainter.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_drawFragment"
-            app:destination="@id/drawFragment" />
-        <argument
-            android:name="number"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="user"
-            app:argType="com.wuliner.littlepainter.User" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/drawFragment"
         android:name="com.wuliner.littlepainter.DrawFragment"
         android:label="fragment_draw"
-        tools:layout="@layout/fragment_draw" >
-        <action
-            app:launchSingleTop="true"
-            android:id="@+id/action_drawFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/drawFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_draw" />
 </navigation>

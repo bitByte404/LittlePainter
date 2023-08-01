@@ -24,8 +24,7 @@ class DrawFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.root.setOnClickListener {
-            val action = DrawFragmentDirections.actionDrawFragmentToHomeFragment(User("jack"))
-            findNavController().navigate(action)
+
         }
     }
 

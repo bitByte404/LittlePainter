@@ -26,9 +26,7 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textView.setOnClickListener {
-            val user = User("pxd", 20)
-            val action = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment(user)
-            findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
+
         }
     }
 
