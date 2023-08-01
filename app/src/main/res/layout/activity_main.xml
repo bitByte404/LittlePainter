@@ -19,14 +19,49 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_nav" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
+    <com.wuliner.littlepainter.bottomView.BottomView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:menu="@menu/bottom_menu"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+        <com.google.android.material.tabs.TabItem
+            android:background="#54826C"
+            app:icon="@drawable/ic_home"
+            app:title="消息"
+            app:select_icon="@drawable/ic_home"
+            app:normal_color="@color/white"
+            app:selected_color="#3E933B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:background="#AC5C5C"
+            app:icon="@drawable/ic_guide"
+            app:title="联系人"
+            app:select_icon="@drawable/ic_home"
+            app:normal_color="@color/white"
+            app:selected_color="#3E933B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:background="#2936AC"
+            app:icon="@drawable/ic_face"
+            app:title="发现"
+            app:select_icon="@drawable/ic_home"
+            app:normal_color="@color/white"
+            app:selected_color="#3E933B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.google.android.material.tabs.TabItem
+            android:background="#BDB156"
+            app:icon="@drawable/ic_draw"
+            app:title="我"
+            app:select_icon="@drawable/ic_home"
+            app:normal_color="@color/white"
+            app:selected_color="#3E933B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.wuliner.littlepainter.bottomView.BottomView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
