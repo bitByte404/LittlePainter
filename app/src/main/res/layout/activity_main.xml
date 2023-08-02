@@ -20,45 +20,46 @@
         app:navGraph="@navigation/main_nav" />
 
     <com.wuliner.littlepainter.bottomView.BottomView
+        android:id="@+id/bottomView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" >
-        <com.google.android.material.tabs.TabItem
-            android:background="#54826C"
+        <com.wuliner.littlepainter.bottomView.TabItem
+            android:background="@color/white"
             app:icon="@drawable/ic_home"
             app:title="消息"
             app:select_icon="@drawable/ic_home"
-            app:normal_color="@color/white"
+            app:normal_color="@color/black"
             app:selected_color="#3E933B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <com.google.android.material.tabs.TabItem
-            android:background="#AC5C5C"
+        <com.wuliner.littlepainter.bottomView.TabItem
+            android:background="@color/white"
             app:icon="@drawable/ic_guide"
             app:title="联系人"
             app:select_icon="@drawable/ic_home"
-            app:normal_color="@color/white"
+            app:normal_color="@color/black"
             app:selected_color="#3E933B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <com.google.android.material.tabs.TabItem
-            android:background="#2936AC"
+        <com.wuliner.littlepainter.bottomView.TabItem
+            android:background="@color/white"
             app:icon="@drawable/ic_face"
             app:title="发现"
             app:select_icon="@drawable/ic_home"
-            app:normal_color="@color/white"
+            app:normal_color="@color/black"
             app:selected_color="#3E933B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <com.google.android.material.tabs.TabItem
-            android:background="#BDB156"
+        <com.wuliner.littlepainter.bottomView.TabItem
+            android:background="@color/white"
             app:icon="@drawable/ic_draw"
             app:title="我"
             app:select_icon="@drawable/ic_home"
-            app:normal_color="@color/white"
+            app:normal_color="@color/black"
             app:selected_color="#3E933B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
