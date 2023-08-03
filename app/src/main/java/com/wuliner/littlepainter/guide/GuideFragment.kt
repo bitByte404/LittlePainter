@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.wuliner.littlepainter.databinding.FragmentGuideBinding
 import com.wuliner.littlepainter.utils.SPUtils
 
@@ -26,5 +27,17 @@ class GuideFragment : Fragment() {
             parentFragmentManager,
             lifecycle
         )
+
+        binding.viewPager.registerOnPageChangeCallback( object : OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.indicatorView.select(position)
+            }
+        })
+
+        binding.indicatorView.addPageChangeCallBack = { page ->
+            if (binding.viewPager.currentItem != page) {
+                binding.viewPager.setCurrentItem(page, true)
+            }
+        }
     }
 }
