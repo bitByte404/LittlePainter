@@ -20,7 +20,11 @@ class GuideFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //写入数据
-        SPUtils.defaultUtils(requireContext()).isFirst = false
+        //配置ViewPager2的adapter
+        binding.viewPager.adapter = GuideAdapter(
+            listOf(GuideOneFragment(), GuideTwoFragment(), GuideThreeFragment(), GuideFourFragment()),
+            parentFragmentManager,
+            lifecycle
+        )
     }
 }
