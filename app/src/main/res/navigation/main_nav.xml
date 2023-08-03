@@ -36,7 +36,9 @@
         tools:layout="@layout/fragment_guide" >
         <action
             android:id="@+id/action_guideFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to__left" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

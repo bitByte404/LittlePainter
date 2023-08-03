@@ -1,5 +1,6 @@
 package com.wuliner.littlepainter.guide
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -26,6 +27,7 @@ class IndicatorView(context: Context, attrs: AttributeSet?) : View(context, attr
         isAntiAlias = true
     }
 
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         var m_width = MeasureSpec.getSize(widthMeasureSpec)
@@ -45,6 +47,10 @@ class IndicatorView(context: Context, attrs: AttributeSet?) : View(context, attr
 
     private var mStartX = 0f
     private var mTop = 0f
+    private var mMoveSpace = 0f //动画时 宽度的变化值0 - 20
+    private var mDirection: Direction = Direction.None //移动方向
+
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mStartX = (width - (3 * mNormalWidth + mSelectedWidth + 3 * mSpace)).toFloat() / 2
@@ -53,28 +59,70 @@ class IndicatorView(context: Context, attrs: AttributeSet?) : View(context, attr
 
     /**提供给外部设置当前选中哪一个*/
     fun select(index: Int) {
-        if (mCurrentIndex == index) return
-        mCurrentIndex = index
-        invalidate()
+        if (mCurrentIndex == index) {
+            mDirection = Direction.None
+        } else {
+            //确定移动的方向
+            mDirection =  if (mCurrentIndex > index) { Direction.Left } else { Direction.Right }
+            mCurrentIndex = index
+            startMoveAnimation() //开启移动的动画
+            invalidate()
+        }
+    }
+
+    private fun startMoveAnimation() {
+        ValueAnimator.ofFloat(0f, dp2px(20).toFloat()).apply {
+            duration = 500
+            addUpdateListener {
+                mMoveSpace = it.animatedValue as Float
+                invalidate()
+            }
+            start()
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        for (i in 0 until 4) {
-
-            //确定left
-            val left = mStartX + if (i > mCurrentIndex) {
-                mSelectedWidth + mSpace + (i - 1)* (mNormalWidth + mSpace)
+        for (i in 0 until 4){
+            var left = mStartX + if (i > mCurrentIndex) {
+                mSelectedWidth + mSpace + (i - 1) * (mNormalWidth + mSpace)
             } else {
                 i * (mNormalWidth + mSpace)
             }
-
             //确定right
-            val right = left + if (i == mCurrentIndex) mSelectedWidth else mNormalWidth
+            var right = left + if (i == mCurrentIndex) mSelectedWidth else mNormalWidth
+
+
+            if (mDirection != Direction.None) { //只有左右移动时才需要计算移动的变化
+                when (i) {
+                    mCurrentIndex -> {//判断是不是当前这个点
+                        if (mDirection == Direction.Left) {
+                            right -= dp2px(20)
+                            right += mMoveSpace //left往右边移动
+                        } else {
+                            left += dp2px(20)
+                            left -= mMoveSpace //往右边移动
+                        }
+                    }
+                    mCurrentIndex-1 ->{  //上一个点
+                        if (mDirection == Direction.Right){
+                            right  += dp2px(20)
+                            right -= mMoveSpace
+                        }
+                    }
+                    mCurrentIndex+1->{ //下一个点
+                        if (mDirection == Direction.Left){
+                            left -= dp2px(20)
+                            left += mMoveSpace
+                        }
+                    }
+                }
+            }
+
             //确定画笔颜色
             mPaint.color = if (i == mCurrentIndex) mSelectedColor else mNormalColor
             canvas?.drawRoundRect(
-                left, mTop, right, mTop + mHeight, mCornerRadius, mCornerRadius, mPaint
+                left,mTop,right,mTop+mHeight,mCornerRadius,mCornerRadius,mPaint
             )
         }
     }
@@ -83,25 +131,28 @@ class IndicatorView(context: Context, attrs: AttributeSet?) : View(context, attr
     var addPageChangeCallBack: ((page: Int) -> Unit)? = null //回调
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN) {
-            //判断点击的是左边还是右边
-           if (event.x > width / 2) {
-                //右边被点击
-                mCurrentIndex++
-                if (mCurrentIndex == 4) {
-                    mCurrentIndex = 3
+        if (event?.action == MotionEvent.ACTION_DOWN){
+            //判断点击的左边还是右边
+            var index = 0
+            if (event.x > width/2){
+                //右边
+                index = mCurrentIndex+1
+                if (index > 3){
+                    return true
                 }
-            } else {
-                //左边被点击
-                mCurrentIndex--
-               if (mCurrentIndex == -1) {
-                   mCurrentIndex = 0
-               }
+            }else{
+                //左边
+                index = mCurrentIndex-1
+                if (index < 0){
+                    return true
+                }
             }
-            addPageChangeCallBack?.let { it(mCurrentIndex) } //回调出去
-            invalidate()
+            addPageChangeCallBack?.let { it(index) } //回调出去
         }
         return true
     }
 
+    enum class Direction {
+        Left, Right, None
+    }
 }

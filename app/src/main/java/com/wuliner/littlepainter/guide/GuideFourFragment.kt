@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.wuliner.littlepainter.R
 import com.wuliner.littlepainter.databinding.FragmentGuideFourBinding
 import com.wuliner.littlepainter.utils.AnimUtils
+import com.wuliner.littlepainter.utils.SPUtils
 
 
 class GuideFourFragment : Fragment() {
@@ -17,6 +19,13 @@ class GuideFourFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGuideFourBinding.inflate(layoutInflater, container , false)
+
+        binding.btExperience.setOnClickListener {
+            //改变idFirst的值
+            SPUtils.defaultUtils(requireContext()).isFirst = false
+            //切换到主页
+            findNavController().navigate(R.id.action_guideFragment_to_homeFragment)
+        }
         return binding.root
     }
 
