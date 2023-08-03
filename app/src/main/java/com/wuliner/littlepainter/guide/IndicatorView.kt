@@ -131,23 +131,28 @@ class IndicatorView(context: Context, attrs: AttributeSet?) : View(context, attr
     var addPageChangeCallBack: ((page: Int) -> Unit)? = null //回调
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if (event?.action == MotionEvent.ACTION_DOWN){
-            //判断点击的左边还是右边
+        if (event?.action == MotionEvent.ACTION_DOWN) {
+            //判断点击的是左边还是右边
             var index = 0
-            if (event.x > width/2){
-                //右边
-                index = mCurrentIndex+1
-                if (index > 3){
-                    return true
+           if (event.x > width / 2) {
+                //右边被点击
+                index = mCurrentIndex + 1
+                if (index > 3) {
+                   return true
+                } else {
+                    index = mCurrentIndex - 1
                 }
-            }else{
-                //左边
-                index = mCurrentIndex-1
-                if (index < 0){
-                    return true
-                }
+                select(index)
+            } else {
+                //左边被点击
+                mCurrentIndex--
+               if (mCurrentIndex == -1) {
+                   mCurrentIndex = 0
+               }
+
             }
-            addPageChangeCallBack?.let { it(index) } //回调出去
+            addPageChangeCallBack?.let { it(mCurrentIndex) } //回调出去
+
         }
         return true
     }
