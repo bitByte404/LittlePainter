@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.wuliner.littlepainter.R
 
 
@@ -31,12 +33,18 @@ class HomeFragment : Fragment() {
             RecyclerView.VERTICAL, //HORIZONTAL
             false
         )
+
+        //recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         /**配置适配器*/
-        val mAdapter = QQAdapter()
+        val mAdapter = ContactAdapter()
         recyclerView.adapter = mAdapter
+
+        /**按页显示*/
+        //PagerSnapHelper().attachToRecyclerView(recyclerView)
 
         /**配置数据源*/
         mAdapter.setData(listOf(
+            Friend(isFriend = false, title = "同班同学"),
             Friend(R.drawable.icon1,"Jack",""),
             Friend(R.drawable.icon2,"Rose",""),
             Friend(R.drawable.icon3,"Merry",""),
@@ -45,6 +53,7 @@ class HomeFragment : Fragment() {
             Friend(R.drawable.icon3,"John",""),
             Friend(R.drawable.icon1,"Jack",""),
             Friend(R.drawable.icon2,"Rose",""),
+            Friend(isFriend = false, title = "大学好友"),
             Friend(R.drawable.icon3,"Merry",""),
             Friend(R.drawable.icon1,"Peter",""),
             Friend(R.drawable.icon2,"Lily",""),

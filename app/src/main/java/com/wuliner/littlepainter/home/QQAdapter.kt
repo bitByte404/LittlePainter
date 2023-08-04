@@ -44,4 +44,14 @@ class QQAdapter : RecyclerView.Adapter<QQAdapter.MyViewHolder>() {
     fun setData(friend: List<Friend>) {
         mFriends = friend
     }
+
+    /**
+     * 模拟qq的分组功能
+     * RecyclerView显示只有一种类型的item
+     *      好友 layout_qq_item
+     *      组名 layout_qq_section
+     *
+     *      多类型的RecyclerView
+     *      同一个RecyclerView上显示多种类型的Item
+     */
 }
