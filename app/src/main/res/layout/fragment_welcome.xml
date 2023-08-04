@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/icon2"
+        app:srcCompat="@drawable/logo2"
         android:layout_width="112dp"
         android:layout_height="112dp"/>
 
